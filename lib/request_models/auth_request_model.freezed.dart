@@ -163,6 +163,197 @@ abstract class _GetOtpNumberRequestModel implements GetOtpNumberRequestModel {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+RegisterUserRequestModel _$RegisterUserRequestModelFromJson(
+    Map<String, dynamic> json) {
+  return _RegisterUserRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$RegisterUserRequestModel {
+  String get name => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  @JsonKey(name: "mobile_number")
+  String? get mobileNumber => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RegisterUserRequestModelCopyWith<RegisterUserRequestModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RegisterUserRequestModelCopyWith<$Res> {
+  factory $RegisterUserRequestModelCopyWith(RegisterUserRequestModel value,
+          $Res Function(RegisterUserRequestModel) then) =
+      _$RegisterUserRequestModelCopyWithImpl<$Res, RegisterUserRequestModel>;
+  @useResult
+  $Res call(
+      {String name,
+      String email,
+      @JsonKey(name: "mobile_number") String? mobileNumber});
+}
+
+/// @nodoc
+class _$RegisterUserRequestModelCopyWithImpl<$Res,
+        $Val extends RegisterUserRequestModel>
+    implements $RegisterUserRequestModelCopyWith<$Res> {
+  _$RegisterUserRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? email = null,
+    Object? mobileNumber = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      mobileNumber: freezed == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$RegisterUserRequestModelImplCopyWith<$Res>
+    implements $RegisterUserRequestModelCopyWith<$Res> {
+  factory _$$RegisterUserRequestModelImplCopyWith(
+          _$RegisterUserRequestModelImpl value,
+          $Res Function(_$RegisterUserRequestModelImpl) then) =
+      __$$RegisterUserRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String name,
+      String email,
+      @JsonKey(name: "mobile_number") String? mobileNumber});
+}
+
+/// @nodoc
+class __$$RegisterUserRequestModelImplCopyWithImpl<$Res>
+    extends _$RegisterUserRequestModelCopyWithImpl<$Res,
+        _$RegisterUserRequestModelImpl>
+    implements _$$RegisterUserRequestModelImplCopyWith<$Res> {
+  __$$RegisterUserRequestModelImplCopyWithImpl(
+      _$RegisterUserRequestModelImpl _value,
+      $Res Function(_$RegisterUserRequestModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? email = null,
+    Object? mobileNumber = freezed,
+  }) {
+    return _then(_$RegisterUserRequestModelImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      mobileNumber: freezed == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$RegisterUserRequestModelImpl implements _RegisterUserRequestModel {
+  const _$RegisterUserRequestModelImpl(
+      {required this.name,
+      required this.email,
+      @JsonKey(name: "mobile_number") required this.mobileNumber});
+
+  factory _$RegisterUserRequestModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RegisterUserRequestModelImplFromJson(json);
+
+  @override
+  final String name;
+  @override
+  final String email;
+  @override
+  @JsonKey(name: "mobile_number")
+  final String? mobileNumber;
+
+  @override
+  String toString() {
+    return 'RegisterUserRequestModel(name: $name, email: $email, mobileNumber: $mobileNumber)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RegisterUserRequestModelImpl &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, name, email, mobileNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RegisterUserRequestModelImplCopyWith<_$RegisterUserRequestModelImpl>
+      get copyWith => __$$RegisterUserRequestModelImplCopyWithImpl<
+          _$RegisterUserRequestModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$RegisterUserRequestModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _RegisterUserRequestModel implements RegisterUserRequestModel {
+  const factory _RegisterUserRequestModel(
+      {required final String name,
+      required final String email,
+      @JsonKey(name: "mobile_number")
+      required final String? mobileNumber}) = _$RegisterUserRequestModelImpl;
+
+  factory _RegisterUserRequestModel.fromJson(Map<String, dynamic> json) =
+      _$RegisterUserRequestModelImpl.fromJson;
+
+  @override
+  String get name;
+  @override
+  String get email;
+  @override
+  @JsonKey(name: "mobile_number")
+  String? get mobileNumber;
+  @override
+  @JsonKey(ignore: true)
+  _$$RegisterUserRequestModelImplCopyWith<_$RegisterUserRequestModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 CheckOtpNumberRequestModel _$CheckOtpNumberRequestModelFromJson(
     Map<String, dynamic> json) {
   return _CheckOtpNumberRequestModel.fromJson(json);

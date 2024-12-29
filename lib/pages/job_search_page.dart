@@ -7,12 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../components/empty_data_view.dart';
 import '../components/job_details_component.dart';
 import '../responce_models/job_details_response_model.dart';
 import '../utils/custom_colors.dart';
 
 class JobSearchPage extends StatefulWidget {
-  final SearchJobsRequestModel? searchJobsRequestModel;
+  final SearchJobsRequestModel searchJobsRequestModel;
   const JobSearchPage({super.key, required this.searchJobsRequestModel});
 
   @override
@@ -27,7 +28,7 @@ class _JobSearchPageState extends State<JobSearchPage> {
       top: true,
       child: StatefulWrapper(
         onInit: (){
-          // jobDetailsViewModel.performSearchJobs(widget.searchJobsRequestModel);
+          jobDetailsViewModel.performSearchJobs(widget.searchJobsRequestModel);
         },
         child: Scaffold(body: SizedBox(
           width: double.infinity,
@@ -41,23 +42,23 @@ class _JobSearchPageState extends State<JobSearchPage> {
                 child: Obx(() =>
                    jobDetailsViewModel.searchJobsObserver.value.maybeWhen(
                      error: (error){
-                       return Center(child: SizedBox(width: 50,height: 50,child: CircularProgressIndicator(color: CustomColors.primary,)));
+                       return Center(child: SizedBox(width: 40,height: 40,child: CircularProgressIndicator(color: CustomColors.primary,)));
                      },
-                       orElse: () =>  Center(child: SizedBox(width: 50,height: 50,child: CircularProgressIndicator(color: CustomColors.primary,))),
-                  loading: (loading){
-                         return Center(child: SizedBox(width: 50,height: 50,child: CircularProgressIndicator(color: CustomColors.primary,)));
-                       },
+                       orElse: () =>  Center(child: SizedBox(width: 40,height: 40,child: CircularProgressIndicator(color: CustomColors.primary,))),
+                        loading: (loading){
+                               return Center(child: SizedBox(width: 40,height: 40,child: CircularProgressIndicator(color: CustomColors.primary,)));
+                             },
                        success: (data){
                          final  responseData = (data as JobDetailsResponseModel).data as List<dynamic>;
                          final jobDetailsDataModelList = responseData.map((e) => JobDetailsModel.fromJson(e)).toList();
                          return Padding(
                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                           child: ListView.builder(
+                           child: jobDetailsDataModelList.isEmpty ? Center(child: EmptyDataView(text:"No jobs Found")) : ListView.builder(
                              scrollDirection: Axis.vertical,
                              itemCount: jobDetailsDataModelList.length,
                              itemBuilder: (BuildContext context, int index) {
                                final modelData = jobDetailsDataModelList[index];
-                               return  JobDetailsComponent(dataModel: modelData);
+                               return  JobDetailsComponent(jobType: "allJobs",dataModel: modelData);
                              },
                            ),
                          );

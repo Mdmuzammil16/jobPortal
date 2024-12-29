@@ -1,9 +1,13 @@
+import 'package:butter_fly/responce_models/notification_response_model.dart';
 import 'package:butter_fly/utils/custom_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'custom_network_image.dart';
+
 class NotificationComponent extends StatefulWidget {
-  const NotificationComponent({super.key});
+  final NotificationModel? notificationModel;
+  const NotificationComponent({super.key, required this.notificationModel});
 
   @override
   State<NotificationComponent> createState() => _NotificationComponentState();
@@ -27,10 +31,9 @@ class _NotificationComponentState extends State<NotificationComponent> {
           padding: const EdgeInsets.all(10),
           child: Row(
             children: [
-              Container(decoration:BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 1,color: CustomColors.gray)),child: Padding(
-                padding: const EdgeInsets.all(1),
-                child: Image.asset("assets/images/example.png",width: 100,height: 100,),
-              )),
+            SizedBox(width: 100,height: 100,child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: CustomNetworkImage(imageUrl: widget.notificationModel?.companyImage ?? "",fit:BoxFit.cover,)),),
               Expanded(
                 child: Padding(
                   padding:  const EdgeInsets.symmetric(horizontal: 10),
@@ -45,7 +48,7 @@ class _NotificationComponentState extends State<NotificationComponent> {
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             fontStyle: FontStyle.normal,
-                          ),"Hotel Vengamamba"),
+                          ),widget.notificationModel?.companyName ?? ""),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: const Text(

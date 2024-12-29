@@ -8,9 +8,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../request_models/job_details_request_model.dart';
 import '../responce_models/job_details_response_model.dart';
 import '../utils/custom_colors.dart';
+import '../view_models/book_marks_view_model.dart';
 import 'description_tab.dart';
 
 class JobDetailsOverviewPage extends StatefulWidget {
@@ -23,6 +26,8 @@ class JobDetailsOverviewPage extends StatefulWidget {
 
 class _JobDetailsOverviewPageState extends State<JobDetailsOverviewPage> {
   final jobDetailsViewModel = Get.put(JobDetailsViewModel());
+  final bookMarksViewModel = Get.put(BookMarksViewModel());
+
   final List<String> myTabs = [
      'Description',
      'Company',
@@ -66,7 +71,7 @@ class _JobDetailsOverviewPageState extends State<JobDetailsOverviewPage> {
                                 GestureDetector(onTap:(){
                                   Get.back();
                                 },child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
                                   child: Image.asset("assets/images/arrow_left.png",width: 20,height: 20,color: Colors.white,),
                                 )),
                                 Expanded(
@@ -80,11 +85,25 @@ class _JobDetailsOverviewPageState extends State<JobDetailsOverviewPage> {
                                         fontStyle: FontStyle.normal,
                                       ),""),
                                 ),
-                                GestureDetector(onTap: (){},child: Image.asset("assets/images/share.png",width: 20,height: 20,)),
-                                GestureDetector(onTap:(){},child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  child: Image.asset("assets/images/bookmark.png",width: 20,height: 20,),
-                                )),
+                                GestureDetector(onTap: (){
+                                  openWhatsApp(jobDetailsDataModelList);
+                                },child: Image.asset("assets/images/share.png",width: 20,height: 20,)),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                                  child: Obx(() => bookMarksViewModel.addToBookMarkObserver.value.maybeWhen(
+                                      loading:(loading) => SizedBox(width: 10,height: 10,child: CircularProgressIndicator()),
+                                      success: (data){
+                                        return (data == jobDetailsDataModelList.id.toString()) == true ?  Image.asset("assets/images/bookmark.png",width: 20,height: 20,color: Colors.yellow) : GestureDetector(
+                                            onTap: (){
+                                              bookMarksViewModel.performAddToBookMark(AddToBookMarkRequestModel(jobId: jobDetailsDataModelList.id.toString() ?? ""));
+                                            },child: Image.asset("assets/images/bookmark.png",width: 20,height: 20,)) ;
+                                      },
+                                      orElse: () => GestureDetector(
+                                          onTap: (){
+                                            bookMarksViewModel.performAddToBookMark(AddToBookMarkRequestModel(jobId: jobDetailsDataModelList.id.toString() ?? ""));
+                                          },
+                                          child: Image.asset("assets/images/bookmark.png",width: 20,height: 20,)))),
+                                ),
                               ],),),
                             Container(
                               height: 130,
@@ -158,9 +177,9 @@ class _JobDetailsOverviewPageState extends State<JobDetailsOverviewPage> {
                         Expanded(
                           child: TabBarView(
                             children: [
-                              DescriptionTab(),
-                              CompanyDetailsTab(),
-                              ReviewsTab()
+                              DescriptionTab(company: jobDetailsDataModelList.getCompanies),
+                              CompanyDetailsTab(company: jobDetailsDataModelList.getCompanies),
+                              const ReviewsTab()
                             ],
                           ),
                         ),
@@ -223,5 +242,16 @@ class _JobDetailsOverviewPageState extends State<JobDetailsOverviewPage> {
         ),
       ),
     );
+  }
+  void openWhatsApp(JobDetailsModel modelData) async {
+    final String playStoreUrl = "https://play.google.com/store/apps/details?id=com.job.jobsEasy";
+    final String message = "Check Out Our Latest Jobs On Job Easy  \n Company : ${modelData.getCompanies?.companyName} \n Job Role : ${modelData.getCategories?.categoryName} \n Type : ${modelData.getJobTypes?.typeName} , ${modelData.getExperienceLevels?.experienceLevelName} \n Address : ${modelData.description} \n ${playStoreUrl}";
+    String url = "whatsapp://send?text=${Uri.encodeComponent(message)}";
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      Get.snackbar("Eroor", "Could not launch WhatsApp",backgroundColor: CustomColors.primary,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM);
+      print("Could not launch WhatsApp");
+    }
   }
 }

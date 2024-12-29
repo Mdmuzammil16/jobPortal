@@ -378,21 +378,24 @@ CheckOtpNumberResponseModel _$CheckOtpNumberResponseModelFromJson(
 mixin _$CheckOtpNumberResponseModel {
   bool? get success => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
-  dynamic get data => throw _privateConstructorUsedError;
+  VerifyOtpResponse? get data => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool? success, String? message, dynamic data)
+    required TResult Function(
+            bool? success, String? message, VerifyOtpResponse? data)
         userInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool? success, String? message, dynamic data)? userInfo,
+    TResult? Function(bool? success, String? message, VerifyOtpResponse? data)?
+        userInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool? success, String? message, dynamic data)? userInfo,
+    TResult Function(bool? success, String? message, VerifyOtpResponse? data)?
+        userInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -426,7 +429,9 @@ abstract class $CheckOtpNumberResponseModelCopyWith<$Res> {
       _$CheckOtpNumberResponseModelCopyWithImpl<$Res,
           CheckOtpNumberResponseModel>;
   @useResult
-  $Res call({bool? success, String? message, dynamic data});
+  $Res call({bool? success, String? message, VerifyOtpResponse? data});
+
+  $VerifyOtpResponseCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -459,8 +464,20 @@ class _$CheckOtpNumberResponseModelCopyWithImpl<$Res,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as VerifyOtpResponse?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $VerifyOtpResponseCopyWith<$Res>? get data {
+    if (_value.data == null) {
+      return null;
+    }
+
+    return $VerifyOtpResponseCopyWith<$Res>(_value.data!, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
   }
 }
 
@@ -473,7 +490,10 @@ abstract class _$$CheckOtpNumberResponseModelImplCopyWith<$Res>
       __$$CheckOtpNumberResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool? success, String? message, dynamic data});
+  $Res call({bool? success, String? message, VerifyOtpResponse? data});
+
+  @override
+  $VerifyOtpResponseCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -505,7 +525,7 @@ class __$$CheckOtpNumberResponseModelImplCopyWithImpl<$Res>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as VerifyOtpResponse?,
     ));
   }
 }
@@ -526,7 +546,7 @@ class _$CheckOtpNumberResponseModelImpl
   @override
   final String? message;
   @override
-  final dynamic data;
+  final VerifyOtpResponse? data;
 
   @override
   String toString() {
@@ -540,13 +560,12 @@ class _$CheckOtpNumberResponseModelImpl
             other is _$CheckOtpNumberResponseModelImpl &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.message, message) || other.message == message) &&
-            const DeepCollectionEquality().equals(other.data, data));
+            (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, success, message, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(runtimeType, success, message, data);
 
   @JsonKey(ignore: true)
   @override
@@ -558,7 +577,8 @@ class _$CheckOtpNumberResponseModelImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool? success, String? message, dynamic data)
+    required TResult Function(
+            bool? success, String? message, VerifyOtpResponse? data)
         userInfo,
   }) {
     return userInfo(success, message, data);
@@ -567,7 +587,8 @@ class _$CheckOtpNumberResponseModelImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool? success, String? message, dynamic data)? userInfo,
+    TResult? Function(bool? success, String? message, VerifyOtpResponse? data)?
+        userInfo,
   }) {
     return userInfo?.call(success, message, data);
   }
@@ -575,7 +596,8 @@ class _$CheckOtpNumberResponseModelImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool? success, String? message, dynamic data)? userInfo,
+    TResult Function(bool? success, String? message, VerifyOtpResponse? data)?
+        userInfo,
     required TResult orElse(),
   }) {
     if (userInfo != null) {
@@ -625,7 +647,7 @@ abstract class _CheckOtpNumberResponseModel
   const factory _CheckOtpNumberResponseModel(
       {final bool? success,
       final String? message,
-      final dynamic data}) = _$CheckOtpNumberResponseModelImpl;
+      final VerifyOtpResponse? data}) = _$CheckOtpNumberResponseModelImpl;
 
   factory _CheckOtpNumberResponseModel.fromJson(Map<String, dynamic> json) =
       _$CheckOtpNumberResponseModelImpl.fromJson;
@@ -635,10 +657,278 @@ abstract class _CheckOtpNumberResponseModel
   @override
   String? get message;
   @override
-  dynamic get data;
+  VerifyOtpResponse? get data;
   @override
   @JsonKey(ignore: true)
   _$$CheckOtpNumberResponseModelImplCopyWith<_$CheckOtpNumberResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+RegisterUserResponseModel _$RegisterUserResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _RegisterUserResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$RegisterUserResponseModel {
+  bool? get success => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  dynamic get data => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool? success, String? message, dynamic data)
+        userInfo,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(bool? success, String? message, dynamic data)? userInfo,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool? success, String? message, dynamic data)? userInfo,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_RegisterUserResponseModel value) userInfo,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_RegisterUserResponseModel value)? userInfo,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_RegisterUserResponseModel value)? userInfo,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RegisterUserResponseModelCopyWith<RegisterUserResponseModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RegisterUserResponseModelCopyWith<$Res> {
+  factory $RegisterUserResponseModelCopyWith(RegisterUserResponseModel value,
+          $Res Function(RegisterUserResponseModel) then) =
+      _$RegisterUserResponseModelCopyWithImpl<$Res, RegisterUserResponseModel>;
+  @useResult
+  $Res call({bool? success, String? message, dynamic data});
+}
+
+/// @nodoc
+class _$RegisterUserResponseModelCopyWithImpl<$Res,
+        $Val extends RegisterUserResponseModel>
+    implements $RegisterUserResponseModelCopyWith<$Res> {
+  _$RegisterUserResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? success = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      success: freezed == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$RegisterUserResponseModelImplCopyWith<$Res>
+    implements $RegisterUserResponseModelCopyWith<$Res> {
+  factory _$$RegisterUserResponseModelImplCopyWith(
+          _$RegisterUserResponseModelImpl value,
+          $Res Function(_$RegisterUserResponseModelImpl) then) =
+      __$$RegisterUserResponseModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool? success, String? message, dynamic data});
+}
+
+/// @nodoc
+class __$$RegisterUserResponseModelImplCopyWithImpl<$Res>
+    extends _$RegisterUserResponseModelCopyWithImpl<$Res,
+        _$RegisterUserResponseModelImpl>
+    implements _$$RegisterUserResponseModelImplCopyWith<$Res> {
+  __$$RegisterUserResponseModelImplCopyWithImpl(
+      _$RegisterUserResponseModelImpl _value,
+      $Res Function(_$RegisterUserResponseModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? success = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_$RegisterUserResponseModelImpl(
+      success: freezed == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$RegisterUserResponseModelImpl implements _RegisterUserResponseModel {
+  const _$RegisterUserResponseModelImpl(
+      {this.success, this.message, this.data});
+
+  factory _$RegisterUserResponseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RegisterUserResponseModelImplFromJson(json);
+
+  @override
+  final bool? success;
+  @override
+  final String? message;
+  @override
+  final dynamic data;
+
+  @override
+  String toString() {
+    return 'RegisterUserResponseModel.userInfo(success: $success, message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RegisterUserResponseModelImpl &&
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other.data, data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, success, message, const DeepCollectionEquality().hash(data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RegisterUserResponseModelImplCopyWith<_$RegisterUserResponseModelImpl>
+      get copyWith => __$$RegisterUserResponseModelImplCopyWithImpl<
+          _$RegisterUserResponseModelImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool? success, String? message, dynamic data)
+        userInfo,
+  }) {
+    return userInfo(success, message, data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(bool? success, String? message, dynamic data)? userInfo,
+  }) {
+    return userInfo?.call(success, message, data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool? success, String? message, dynamic data)? userInfo,
+    required TResult orElse(),
+  }) {
+    if (userInfo != null) {
+      return userInfo(success, message, data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_RegisterUserResponseModel value) userInfo,
+  }) {
+    return userInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_RegisterUserResponseModel value)? userInfo,
+  }) {
+    return userInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_RegisterUserResponseModel value)? userInfo,
+    required TResult orElse(),
+  }) {
+    if (userInfo != null) {
+      return userInfo(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$RegisterUserResponseModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _RegisterUserResponseModel implements RegisterUserResponseModel {
+  const factory _RegisterUserResponseModel(
+      {final bool? success,
+      final String? message,
+      final dynamic data}) = _$RegisterUserResponseModelImpl;
+
+  factory _RegisterUserResponseModel.fromJson(Map<String, dynamic> json) =
+      _$RegisterUserResponseModelImpl.fromJson;
+
+  @override
+  bool? get success;
+  @override
+  String? get message;
+  @override
+  dynamic get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$RegisterUserResponseModelImplCopyWith<_$RegisterUserResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -648,8 +938,8 @@ VerifyOtpResponse _$VerifyOtpResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$VerifyOtpResponse {
-  UserDataModel? get userInfo => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
+  UserDataModel? get userInfo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -663,7 +953,7 @@ abstract class $VerifyOtpResponseCopyWith<$Res> {
           VerifyOtpResponse value, $Res Function(VerifyOtpResponse) then) =
       _$VerifyOtpResponseCopyWithImpl<$Res, VerifyOtpResponse>;
   @useResult
-  $Res call({UserDataModel? userInfo, String? token});
+  $Res call({String? token, UserDataModel? userInfo});
 
   $UserDataModelCopyWith<$Res>? get userInfo;
 }
@@ -681,18 +971,18 @@ class _$VerifyOtpResponseCopyWithImpl<$Res, $Val extends VerifyOtpResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userInfo = freezed,
     Object? token = freezed,
+    Object? userInfo = freezed,
   }) {
     return _then(_value.copyWith(
-      userInfo: freezed == userInfo
-          ? _value.userInfo
-          : userInfo // ignore: cast_nullable_to_non_nullable
-              as UserDataModel?,
       token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
+      userInfo: freezed == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as UserDataModel?,
     ) as $Val);
   }
 
@@ -717,7 +1007,7 @@ abstract class _$$VerifyOtpResponseImplCopyWith<$Res>
       __$$VerifyOtpResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserDataModel? userInfo, String? token});
+  $Res call({String? token, UserDataModel? userInfo});
 
   @override
   $UserDataModelCopyWith<$Res>? get userInfo;
@@ -734,18 +1024,18 @@ class __$$VerifyOtpResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userInfo = freezed,
     Object? token = freezed,
+    Object? userInfo = freezed,
   }) {
     return _then(_$VerifyOtpResponseImpl(
-      userInfo: freezed == userInfo
-          ? _value.userInfo
-          : userInfo // ignore: cast_nullable_to_non_nullable
-              as UserDataModel?,
       token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
+      userInfo: freezed == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as UserDataModel?,
     ));
   }
 }
@@ -753,19 +1043,19 @@ class __$$VerifyOtpResponseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$VerifyOtpResponseImpl implements _VerifyOtpResponse {
-  const _$VerifyOtpResponseImpl({this.userInfo, this.token});
+  const _$VerifyOtpResponseImpl({this.token, this.userInfo});
 
   factory _$VerifyOtpResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$VerifyOtpResponseImplFromJson(json);
 
   @override
-  final UserDataModel? userInfo;
-  @override
   final String? token;
+  @override
+  final UserDataModel? userInfo;
 
   @override
   String toString() {
-    return 'VerifyOtpResponse(userInfo: $userInfo, token: $token)';
+    return 'VerifyOtpResponse(token: $token, userInfo: $userInfo)';
   }
 
   @override
@@ -773,14 +1063,14 @@ class _$VerifyOtpResponseImpl implements _VerifyOtpResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$VerifyOtpResponseImpl &&
+            (identical(other.token, token) || other.token == token) &&
             (identical(other.userInfo, userInfo) ||
-                other.userInfo == userInfo) &&
-            (identical(other.token, token) || other.token == token));
+                other.userInfo == userInfo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userInfo, token);
+  int get hashCode => Object.hash(runtimeType, token, userInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -799,16 +1089,16 @@ class _$VerifyOtpResponseImpl implements _VerifyOtpResponse {
 
 abstract class _VerifyOtpResponse implements VerifyOtpResponse {
   const factory _VerifyOtpResponse(
-      {final UserDataModel? userInfo,
-      final String? token}) = _$VerifyOtpResponseImpl;
+      {final String? token,
+      final UserDataModel? userInfo}) = _$VerifyOtpResponseImpl;
 
   factory _VerifyOtpResponse.fromJson(Map<String, dynamic> json) =
       _$VerifyOtpResponseImpl.fromJson;
 
   @override
-  UserDataModel? get userInfo;
-  @override
   String? get token;
+  @override
+  UserDataModel? get userInfo;
   @override
   @JsonKey(ignore: true)
   _$$VerifyOtpResponseImplCopyWith<_$VerifyOtpResponseImpl> get copyWith =>
@@ -1285,7 +1575,7 @@ UserDataModel _$UserDataModelFromJson(Map<String, dynamic> json) {
 mixin _$UserDataModel {
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: "sur_name")
-  String? get surName => throw _privateConstructorUsedError;
+  dynamic? get surName => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: "middle_name")
   String? get middleName => throw _privateConstructorUsedError;
@@ -1295,25 +1585,25 @@ mixin _$UserDataModel {
   String? get profilePic => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   @JsonKey(name: "email_verified_at")
-  DateTime? get emailVerifiedAt => throw _privateConstructorUsedError;
+  String? get emailVerifiedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "mobile_number")
   String? get mobileNumber => throw _privateConstructorUsedError;
   String? get otp => throw _privateConstructorUsedError;
   @JsonKey(name: "user_process")
-  String? get userProcess => throw _privateConstructorUsedError;
+  dynamic? get userProcess => throw _privateConstructorUsedError;
   @JsonKey(name: "otp_generated_date_time")
-  DateTime? get otpGeneratedDateTime => throw _privateConstructorUsedError;
+  dynamic? get otpGeneratedDateTime => throw _privateConstructorUsedError;
   @JsonKey(name: "is_user_type")
-  String? get isUserType => throw _privateConstructorUsedError;
+  dynamic? get isUserType => throw _privateConstructorUsedError;
   @JsonKey(name: "access_token")
-  String? get accessToken => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
+  dynamic? get accessToken => throw _privateConstructorUsedError;
+  dynamic? get status => throw _privateConstructorUsedError;
   @JsonKey(name: "sort_order")
-  String? get sortOrder => throw _privateConstructorUsedError;
+  dynamic? get sortOrder => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  dynamic? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: "updated_at")
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  dynamic? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1329,23 +1619,23 @@ abstract class $UserDataModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      @JsonKey(name: "sur_name") String? surName,
+      @JsonKey(name: "sur_name") dynamic? surName,
       String? name,
       @JsonKey(name: "middle_name") String? middleName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "profile_pic") String? profilePic,
       String? email,
-      @JsonKey(name: "email_verified_at") DateTime? emailVerifiedAt,
+      @JsonKey(name: "email_verified_at") String? emailVerifiedAt,
       @JsonKey(name: "mobile_number") String? mobileNumber,
       String? otp,
-      @JsonKey(name: "user_process") String? userProcess,
-      @JsonKey(name: "otp_generated_date_time") DateTime? otpGeneratedDateTime,
-      @JsonKey(name: "is_user_type") String? isUserType,
-      @JsonKey(name: "access_token") String? accessToken,
-      String? status,
-      @JsonKey(name: "sort_order") String? sortOrder,
-      @JsonKey(name: "created_at") DateTime? createdAt,
-      @JsonKey(name: "updated_at") DateTime? updatedAt});
+      @JsonKey(name: "user_process") dynamic? userProcess,
+      @JsonKey(name: "otp_generated_date_time") dynamic? otpGeneratedDateTime,
+      @JsonKey(name: "is_user_type") dynamic? isUserType,
+      @JsonKey(name: "access_token") dynamic? accessToken,
+      dynamic? status,
+      @JsonKey(name: "sort_order") dynamic? sortOrder,
+      @JsonKey(name: "created_at") dynamic? createdAt,
+      @JsonKey(name: "updated_at") dynamic? updatedAt});
 }
 
 /// @nodoc
@@ -1388,7 +1678,7 @@ class _$UserDataModelCopyWithImpl<$Res, $Val extends UserDataModel>
       surName: freezed == surName
           ? _value.surName
           : surName // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1412,7 +1702,7 @@ class _$UserDataModelCopyWithImpl<$Res, $Val extends UserDataModel>
       emailVerifiedAt: freezed == emailVerifiedAt
           ? _value.emailVerifiedAt
           : emailVerifiedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       mobileNumber: freezed == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -1424,35 +1714,35 @@ class _$UserDataModelCopyWithImpl<$Res, $Val extends UserDataModel>
       userProcess: freezed == userProcess
           ? _value.userProcess
           : userProcess // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       otpGeneratedDateTime: freezed == otpGeneratedDateTime
           ? _value.otpGeneratedDateTime
           : otpGeneratedDateTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic?,
       isUserType: freezed == isUserType
           ? _value.isUserType
           : isUserType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       accessToken: freezed == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       sortOrder: freezed == sortOrder
           ? _value.sortOrder
           : sortOrder // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic?,
     ) as $Val);
   }
 }
@@ -1467,23 +1757,23 @@ abstract class _$$UserDataModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
-      @JsonKey(name: "sur_name") String? surName,
+      @JsonKey(name: "sur_name") dynamic? surName,
       String? name,
       @JsonKey(name: "middle_name") String? middleName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "profile_pic") String? profilePic,
       String? email,
-      @JsonKey(name: "email_verified_at") DateTime? emailVerifiedAt,
+      @JsonKey(name: "email_verified_at") String? emailVerifiedAt,
       @JsonKey(name: "mobile_number") String? mobileNumber,
       String? otp,
-      @JsonKey(name: "user_process") String? userProcess,
-      @JsonKey(name: "otp_generated_date_time") DateTime? otpGeneratedDateTime,
-      @JsonKey(name: "is_user_type") String? isUserType,
-      @JsonKey(name: "access_token") String? accessToken,
-      String? status,
-      @JsonKey(name: "sort_order") String? sortOrder,
-      @JsonKey(name: "created_at") DateTime? createdAt,
-      @JsonKey(name: "updated_at") DateTime? updatedAt});
+      @JsonKey(name: "user_process") dynamic? userProcess,
+      @JsonKey(name: "otp_generated_date_time") dynamic? otpGeneratedDateTime,
+      @JsonKey(name: "is_user_type") dynamic? isUserType,
+      @JsonKey(name: "access_token") dynamic? accessToken,
+      dynamic? status,
+      @JsonKey(name: "sort_order") dynamic? sortOrder,
+      @JsonKey(name: "created_at") dynamic? createdAt,
+      @JsonKey(name: "updated_at") dynamic? updatedAt});
 }
 
 /// @nodoc
@@ -1524,7 +1814,7 @@ class __$$UserDataModelImplCopyWithImpl<$Res>
       surName: freezed == surName
           ? _value.surName
           : surName // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1548,7 +1838,7 @@ class __$$UserDataModelImplCopyWithImpl<$Res>
       emailVerifiedAt: freezed == emailVerifiedAt
           ? _value.emailVerifiedAt
           : emailVerifiedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       mobileNumber: freezed == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -1560,35 +1850,35 @@ class __$$UserDataModelImplCopyWithImpl<$Res>
       userProcess: freezed == userProcess
           ? _value.userProcess
           : userProcess // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       otpGeneratedDateTime: freezed == otpGeneratedDateTime
           ? _value.otpGeneratedDateTime
           : otpGeneratedDateTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic?,
       isUserType: freezed == isUserType
           ? _value.isUserType
           : isUserType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       accessToken: freezed == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       sortOrder: freezed == sortOrder
           ? _value.sortOrder
           : sortOrder // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic?,
     ));
   }
 }
@@ -1623,7 +1913,7 @@ class _$UserDataModelImpl implements _UserDataModel {
   final int? id;
   @override
   @JsonKey(name: "sur_name")
-  final String? surName;
+  final dynamic? surName;
   @override
   final String? name;
   @override
@@ -1639,7 +1929,7 @@ class _$UserDataModelImpl implements _UserDataModel {
   final String? email;
   @override
   @JsonKey(name: "email_verified_at")
-  final DateTime? emailVerifiedAt;
+  final String? emailVerifiedAt;
   @override
   @JsonKey(name: "mobile_number")
   final String? mobileNumber;
@@ -1647,27 +1937,27 @@ class _$UserDataModelImpl implements _UserDataModel {
   final String? otp;
   @override
   @JsonKey(name: "user_process")
-  final String? userProcess;
+  final dynamic? userProcess;
   @override
   @JsonKey(name: "otp_generated_date_time")
-  final DateTime? otpGeneratedDateTime;
+  final dynamic? otpGeneratedDateTime;
   @override
   @JsonKey(name: "is_user_type")
-  final String? isUserType;
+  final dynamic? isUserType;
   @override
   @JsonKey(name: "access_token")
-  final String? accessToken;
+  final dynamic? accessToken;
   @override
-  final String? status;
+  final dynamic? status;
   @override
   @JsonKey(name: "sort_order")
-  final String? sortOrder;
+  final dynamic? sortOrder;
   @override
   @JsonKey(name: "created_at")
-  final DateTime? createdAt;
+  final dynamic? createdAt;
   @override
   @JsonKey(name: "updated_at")
-  final DateTime? updatedAt;
+  final dynamic? updatedAt;
 
   @override
   String toString() {
@@ -1680,7 +1970,7 @@ class _$UserDataModelImpl implements _UserDataModel {
         (other.runtimeType == runtimeType &&
             other is _$UserDataModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.surName, surName) || other.surName == surName) &&
+            const DeepCollectionEquality().equals(other.surName, surName) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.middleName, middleName) ||
                 other.middleName == middleName) &&
@@ -1694,21 +1984,18 @@ class _$UserDataModelImpl implements _UserDataModel {
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
             (identical(other.otp, otp) || other.otp == otp) &&
-            (identical(other.userProcess, userProcess) ||
-                other.userProcess == userProcess) &&
-            (identical(other.otpGeneratedDateTime, otpGeneratedDateTime) ||
-                other.otpGeneratedDateTime == otpGeneratedDateTime) &&
-            (identical(other.isUserType, isUserType) ||
-                other.isUserType == isUserType) &&
-            (identical(other.accessToken, accessToken) ||
-                other.accessToken == accessToken) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.sortOrder, sortOrder) ||
-                other.sortOrder == sortOrder) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+            const DeepCollectionEquality()
+                .equals(other.userProcess, userProcess) &&
+            const DeepCollectionEquality()
+                .equals(other.otpGeneratedDateTime, otpGeneratedDateTime) &&
+            const DeepCollectionEquality()
+                .equals(other.isUserType, isUserType) &&
+            const DeepCollectionEquality()
+                .equals(other.accessToken, accessToken) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality().equals(other.sortOrder, sortOrder) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
   @JsonKey(ignore: true)
@@ -1716,7 +2003,7 @@ class _$UserDataModelImpl implements _UserDataModel {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      surName,
+      const DeepCollectionEquality().hash(surName),
       name,
       middleName,
       lastName,
@@ -1725,14 +2012,14 @@ class _$UserDataModelImpl implements _UserDataModel {
       emailVerifiedAt,
       mobileNumber,
       otp,
-      userProcess,
-      otpGeneratedDateTime,
-      isUserType,
-      accessToken,
-      status,
-      sortOrder,
-      createdAt,
-      updatedAt);
+      const DeepCollectionEquality().hash(userProcess),
+      const DeepCollectionEquality().hash(otpGeneratedDateTime),
+      const DeepCollectionEquality().hash(isUserType),
+      const DeepCollectionEquality().hash(accessToken),
+      const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(sortOrder),
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(updatedAt));
 
   @JsonKey(ignore: true)
   @override
@@ -1751,24 +2038,24 @@ class _$UserDataModelImpl implements _UserDataModel {
 abstract class _UserDataModel implements UserDataModel {
   const factory _UserDataModel(
           {final int? id,
-          @JsonKey(name: "sur_name") final String? surName,
+          @JsonKey(name: "sur_name") final dynamic? surName,
           final String? name,
           @JsonKey(name: "middle_name") final String? middleName,
           @JsonKey(name: "last_name") final String? lastName,
           @JsonKey(name: "profile_pic") final String? profilePic,
           final String? email,
-          @JsonKey(name: "email_verified_at") final DateTime? emailVerifiedAt,
+          @JsonKey(name: "email_verified_at") final String? emailVerifiedAt,
           @JsonKey(name: "mobile_number") final String? mobileNumber,
           final String? otp,
-          @JsonKey(name: "user_process") final String? userProcess,
+          @JsonKey(name: "user_process") final dynamic? userProcess,
           @JsonKey(name: "otp_generated_date_time")
-          final DateTime? otpGeneratedDateTime,
-          @JsonKey(name: "is_user_type") final String? isUserType,
-          @JsonKey(name: "access_token") final String? accessToken,
-          final String? status,
-          @JsonKey(name: "sort_order") final String? sortOrder,
-          @JsonKey(name: "created_at") final DateTime? createdAt,
-          @JsonKey(name: "updated_at") final DateTime? updatedAt}) =
+          final dynamic? otpGeneratedDateTime,
+          @JsonKey(name: "is_user_type") final dynamic? isUserType,
+          @JsonKey(name: "access_token") final dynamic? accessToken,
+          final dynamic? status,
+          @JsonKey(name: "sort_order") final dynamic? sortOrder,
+          @JsonKey(name: "created_at") final dynamic? createdAt,
+          @JsonKey(name: "updated_at") final dynamic? updatedAt}) =
       _$UserDataModelImpl;
 
   factory _UserDataModel.fromJson(Map<String, dynamic> json) =
@@ -1778,7 +2065,7 @@ abstract class _UserDataModel implements UserDataModel {
   int? get id;
   @override
   @JsonKey(name: "sur_name")
-  String? get surName;
+  dynamic? get surName;
   @override
   String? get name;
   @override
@@ -1794,7 +2081,7 @@ abstract class _UserDataModel implements UserDataModel {
   String? get email;
   @override
   @JsonKey(name: "email_verified_at")
-  DateTime? get emailVerifiedAt;
+  String? get emailVerifiedAt;
   @override
   @JsonKey(name: "mobile_number")
   String? get mobileNumber;
@@ -1802,27 +2089,27 @@ abstract class _UserDataModel implements UserDataModel {
   String? get otp;
   @override
   @JsonKey(name: "user_process")
-  String? get userProcess;
+  dynamic? get userProcess;
   @override
   @JsonKey(name: "otp_generated_date_time")
-  DateTime? get otpGeneratedDateTime;
+  dynamic? get otpGeneratedDateTime;
   @override
   @JsonKey(name: "is_user_type")
-  String? get isUserType;
+  dynamic? get isUserType;
   @override
   @JsonKey(name: "access_token")
-  String? get accessToken;
+  dynamic? get accessToken;
   @override
-  String? get status;
+  dynamic? get status;
   @override
   @JsonKey(name: "sort_order")
-  String? get sortOrder;
+  dynamic? get sortOrder;
   @override
   @JsonKey(name: "created_at")
-  DateTime? get createdAt;
+  dynamic? get createdAt;
   @override
   @JsonKey(name: "updated_at")
-  DateTime? get updatedAt;
+  dynamic? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$UserDataModelImplCopyWith<_$UserDataModelImpl> get copyWith =>

@@ -19,7 +19,8 @@ import '../view_models/auth_view_model.dart';
 
 class JobDetailsEntryPage extends StatefulWidget {
   final int? userId;
-  const JobDetailsEntryPage({super.key,required this.userId});
+  final bool fromUploadResumePage;
+  const JobDetailsEntryPage({super.key,required this.userId, required this.fromUploadResumePage});
 
   @override
   State<JobDetailsEntryPage> createState() => _JobDetailsEntryPageState();
@@ -32,6 +33,8 @@ class _JobDetailsEntryPageState extends State<JobDetailsEntryPage> {
 
   String? _selectedItem = '1 Year';
   final List<String> _items = ['1 Year', '2 Years', '3 Years', '4 Years'];
+
+  Rx<String> _selectedValue = 'Fres'.obs;
 
 
   @override
@@ -73,10 +76,22 @@ class _JobDetailsEntryPageState extends State<JobDetailsEntryPage> {
                               itemCount:experienceData?.length ?? 0,
                               itemBuilder:(BuildContext context, int index) {
                                 final item = experienceData?[index];
-                                return ExperienceDataComponent(data: item);},
+                                return ExperienceDataComponent(data: item,onClick: (){
+                                  _selectedValue.value = item?.name??"";
+                                },);},
                               mainAxisSpacing: 4.0,
                               crossAxisSpacing: 4.0,
                               staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Container(width: double.infinity,decoration: AppStyles.grayBox,child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+                                child: Text(
+                                    _selectedValue.value.toString(),
+                                    style: TextStyle(color: CustomColors.textColor,fontSize: 16,fontWeight: FontWeight.w500)
+                                ),
+                              ),),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -97,15 +112,17 @@ class _JobDetailsEntryPageState extends State<JobDetailsEntryPage> {
                                       _selectedItem = newValue;
                                     });
                                   },
-                                  underline: SizedBox.shrink(),
+                                  underline: const SizedBox.shrink(),
                                 ),
                               ),),
                             ),
                             GestureDetector(
                               onTap: () async {
+                                authViewModel.uploadResumeFile.value = File("");
                                 await filePickerService.pickPdfFile();
                               },
-                              child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:CustomColors.gray,border: Border.all(width: 1,color: CustomColors.primary)),width:
+                              child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:CustomColors.gray,border: Border.all(width: 1,color: CustomColors.primary)),width:
                               double.infinity,height: 50,child: Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
                                 child: Row(
@@ -121,7 +138,7 @@ class _JobDetailsEntryPageState extends State<JobDetailsEntryPage> {
                                 ),
                               ),),
                             ),
-                            Obx(()=>
+                            Obx(() =>
                                Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
@@ -139,13 +156,24 @@ class _JobDetailsEntryPageState extends State<JobDetailsEntryPage> {
                                   );
                                 },
                                 orElse: (){
-                                  return GestureDetector(onTap: (){
+                                  return  authViewModel.uploadResumeFile.value.path.toString() == "" ? Container(width: double.infinity,height: 50,decoration: BoxDecoration(
+                                    color: CustomColors.primary.withOpacity(0.5)
+                                    ,borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.3),
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),child: const Center(child: Text(style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.w500),'CONTINUE',textAlign: TextAlign.center,)),) :GestureDetector(onTap: (){
                                     if(authViewModel.selectedOption.value == 0){
                                       Get.snackbar('Oops.','Select Your Work Experience', snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.red,colorText: Colors.white);
                                     }else if(authViewModel.uploadResumeFile.value == File('')){
                                     Get.snackbar('Oops.','Upload An Resume', snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.red,colorText: Colors.white);
                                   }else{
-                                      authViewModel.performUploadUserExperience(UserWorkExperienceRequestModel(userId: widget.userId.toString(), userExperienceId:authViewModel.selectedOption.value.toString(), yearsOfExperienced: (_items.indexOf(_selectedItem??"1 Year") + 1).toString()),authViewModel.uploadResumeFile.value);
+                                      authViewModel.performUploadUserExperience(UserWorkExperienceRequestModel(userId: widget.userId.toString(), userExperienceId:authViewModel.selectedOption.value.toString(), yearsOfExperienced: (_items.indexOf(_selectedItem??"1 Year") + 1).toString()),authViewModel.uploadResumeFile.value,widget.fromUploadResumePage);
                                     }
                                     },child: Container(width: double.infinity,height: 50,decoration: AppStyles.primaryButtonStyle,child: const Center(child: Text(style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.w500),'CONTINUE',textAlign: TextAlign.center,)),));
                                 }))

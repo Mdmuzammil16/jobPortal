@@ -87,12 +87,18 @@ _$CompanyImpl _$$CompanyImplFromJson(Map<String, dynamic> json) =>
     _$CompanyImpl(
       id: json['id'] as int?,
       companyName: json['company_name'] as String?,
+      companyImage: json['company_image'] as String?,
+      description: json['description'] as String?,
+      address: json['address'] as String?,
     );
 
 Map<String, dynamic> _$$CompanyImplToJson(_$CompanyImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'company_name': instance.companyName,
+      'company_image': instance.companyImage,
+      'description': instance.description,
+      'address': instance.address,
     };
 
 _$CategoryImpl _$$CategoryImplFromJson(Map<String, dynamic> json) =>

@@ -28,6 +28,11 @@ class AppStyles {
     ,borderRadius: BorderRadius.circular(10)
   );
 
+  static  final  graySelectedBox = BoxDecoration(
+      color: CustomColors.primary
+      ,borderRadius: BorderRadius.circular(10)
+  );
+
   static  final  primaryContainerStyle = BoxDecoration(
       color: CustomColors.secondary
       ,borderRadius: BorderRadius.circular(10),

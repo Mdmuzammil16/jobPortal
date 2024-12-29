@@ -43,7 +43,9 @@ _$CheckOtpNumberResponseModelImpl _$$CheckOtpNumberResponseModelImplFromJson(
     _$CheckOtpNumberResponseModelImpl(
       success: json['success'] as bool?,
       message: json['message'] as String?,
-      data: json['data'],
+      data: json['data'] == null
+          ? null
+          : VerifyOtpResponse.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CheckOtpNumberResponseModelImplToJson(
@@ -54,20 +56,36 @@ Map<String, dynamic> _$$CheckOtpNumberResponseModelImplToJson(
       'data': instance.data,
     };
 
+_$RegisterUserResponseModelImpl _$$RegisterUserResponseModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$RegisterUserResponseModelImpl(
+      success: json['success'] as bool?,
+      message: json['message'] as String?,
+      data: json['data'],
+    );
+
+Map<String, dynamic> _$$RegisterUserResponseModelImplToJson(
+        _$RegisterUserResponseModelImpl instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
 _$VerifyOtpResponseImpl _$$VerifyOtpResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$VerifyOtpResponseImpl(
+      token: json['token'] as String?,
       userInfo: json['userInfo'] == null
           ? null
           : UserDataModel.fromJson(json['userInfo'] as Map<String, dynamic>),
-      token: json['token'] as String?,
     );
 
 Map<String, dynamic> _$$VerifyOtpResponseImplToJson(
         _$VerifyOtpResponseImpl instance) =>
     <String, dynamic>{
-      'userInfo': instance.userInfo,
       'token': instance.token,
+      'userInfo': instance.userInfo,
     };
 
 _$UploadWorkExperienceResponseModelImpl
@@ -106,31 +124,23 @@ Map<String, dynamic> _$$UserWorkExperienceResponseModelImplToJson(
 _$UserDataModelImpl _$$UserDataModelImplFromJson(Map<String, dynamic> json) =>
     _$UserDataModelImpl(
       id: json['id'] as int?,
-      surName: json['sur_name'] as String?,
+      surName: json['sur_name'],
       name: json['name'] as String?,
       middleName: json['middle_name'] as String?,
       lastName: json['last_name'] as String?,
       profilePic: json['profile_pic'] as String?,
       email: json['email'] as String?,
-      emailVerifiedAt: json['email_verified_at'] == null
-          ? null
-          : DateTime.parse(json['email_verified_at'] as String),
+      emailVerifiedAt: json['email_verified_at'] as String?,
       mobileNumber: json['mobile_number'] as String?,
       otp: json['otp'] as String?,
-      userProcess: json['user_process'] as String?,
-      otpGeneratedDateTime: json['otp_generated_date_time'] == null
-          ? null
-          : DateTime.parse(json['otp_generated_date_time'] as String),
-      isUserType: json['is_user_type'] as String?,
-      accessToken: json['access_token'] as String?,
-      status: json['status'] as String?,
-      sortOrder: json['sort_order'] as String?,
-      createdAt: json['created_at'] == null
-          ? null
-          : DateTime.parse(json['created_at'] as String),
-      updatedAt: json['updated_at'] == null
-          ? null
-          : DateTime.parse(json['updated_at'] as String),
+      userProcess: json['user_process'],
+      otpGeneratedDateTime: json['otp_generated_date_time'],
+      isUserType: json['is_user_type'],
+      accessToken: json['access_token'],
+      status: json['status'],
+      sortOrder: json['sort_order'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
     );
 
 Map<String, dynamic> _$$UserDataModelImplToJson(_$UserDataModelImpl instance) =>
@@ -142,18 +152,17 @@ Map<String, dynamic> _$$UserDataModelImplToJson(_$UserDataModelImpl instance) =>
       'last_name': instance.lastName,
       'profile_pic': instance.profilePic,
       'email': instance.email,
-      'email_verified_at': instance.emailVerifiedAt?.toIso8601String(),
+      'email_verified_at': instance.emailVerifiedAt,
       'mobile_number': instance.mobileNumber,
       'otp': instance.otp,
       'user_process': instance.userProcess,
-      'otp_generated_date_time':
-          instance.otpGeneratedDateTime?.toIso8601String(),
+      'otp_generated_date_time': instance.otpGeneratedDateTime,
       'is_user_type': instance.isUserType,
       'access_token': instance.accessToken,
       'status': instance.status,
       'sort_order': instance.sortOrder,
-      'created_at': instance.createdAt?.toIso8601String(),
-      'updated_at': instance.updatedAt?.toIso8601String(),
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
     };
 
 _$GetUserExperienceResponseImpl _$$GetUserExperienceResponseImplFromJson(

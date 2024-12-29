@@ -16,3 +16,11 @@ class SearchJobsRequestModel with _$SearchJobsRequestModel{
     }) = _SearchJobsRequestModel;
   factory SearchJobsRequestModel.fromJson(Map<String,dynamic> json)=> _$SearchJobsRequestModelFromJson(json);
 }
+
+@freezed
+class AddToBookMarkRequestModel with _$AddToBookMarkRequestModel{
+  const factory AddToBookMarkRequestModel({
+    @JsonKey(name:"job_id") required String? jobId,
+  }) = _AddToBookMarkRequestModel;
+  factory AddToBookMarkRequestModel.fromJson(Map<String,dynamic> json)=> _$AddToBookMarkRequestModelFromJson(json);
+}

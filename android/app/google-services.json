@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "274324519250",
+    "project_id": "jobseasy-b4dfc",
+    "storage_bucket": "jobseasy-b4dfc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274324519250:android:62aa5a818df9b83f2b228b",
+        "android_client_info": {
+          "package_name": "com.example.butter_fly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274324519250-vdo8f5tqoi92ipg6n6jboc89djranu8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoLL3QMdWnZbbb8pHQ3Gs1eYeWtXPDWWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274324519250-vdo8f5tqoi92ipg6n6jboc89djranu8o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

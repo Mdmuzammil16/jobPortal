@@ -2,8 +2,12 @@ import 'package:butter_fly/utils/custom_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../responce_models/category_response_model.dart';
+import 'custom_network_image.dart';
+
 class CategoryComponent extends StatefulWidget {
-  const CategoryComponent({super.key});
+  final CategoryModel? categoryModel;
+  const CategoryComponent({super.key, required this.categoryModel});
 
   @override
   State<CategoryComponent> createState() => _CategoryComponentState();
@@ -36,23 +40,27 @@ class _CategoryComponentState extends State<CategoryComponent> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  image: const DecorationImage(
-                    image: AssetImage("assets/images/example.png"),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10), // Same as in the BoxDecoration
+                  child: CustomNetworkImage(
+                    imageUrl: widget.categoryModel?.categoryImage ?? "",
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-            ),
-            const Text(
+            )
+            ,
+            Text(
                 textAlign:TextAlign.justify,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontStyle: FontStyle.normal,
-                ),"Biryanis"),
+                ),widget.categoryModel?.categoryName??""),
             Text(
                 textAlign:TextAlign.justify,
                 style: TextStyle(
@@ -60,7 +68,7 @@ class _CategoryComponentState extends State<CategoryComponent> {
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   fontStyle: FontStyle.normal,
-                ),"5 Openings")
+                ),widget.categoryModel?.openingsText ?? "")
 
           ],
         ),

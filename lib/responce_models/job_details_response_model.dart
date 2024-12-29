@@ -49,6 +49,9 @@ class Company with _$Company {
   const factory Company({
     int? id,
     @JsonKey(name: 'company_name') String? companyName,
+    @JsonKey(name: 'company_image') String? companyImage,
+    String? description,
+    String? address,
   }) = _Company;
 
   factory Company.fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
@@ -84,3 +87,6 @@ class ExperienceLevel with _$ExperienceLevel {
   factory ExperienceLevel.fromJson(Map<String, dynamic> json) =>
       _$ExperienceLevelFromJson(json);
 }
+
+
+

@@ -27,3 +27,15 @@ Map<String, dynamic> _$$SearchJobsRequestModelImplToJson(
       'min_salary': instance.minSalary,
       'max_salary': instance.maxSalary,
     };
+
+_$AddToBookMarkRequestModelImpl _$$AddToBookMarkRequestModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AddToBookMarkRequestModelImpl(
+      jobId: json['job_id'] as String?,
+    );
+
+Map<String, dynamic> _$$AddToBookMarkRequestModelImplToJson(
+        _$AddToBookMarkRequestModelImpl instance) =>
+    <String, dynamic>{
+      'job_id': instance.jobId,
+    };

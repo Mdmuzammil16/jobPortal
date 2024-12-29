@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:butter_fly/api/api_provider.dart';
 import 'package:butter_fly/pages/job_details_entry_page.dart';
 import 'package:butter_fly/pages/main_page.dart';
+import 'package:butter_fly/pages/register_user_page.dart';
 import 'package:butter_fly/request_models/auth_request_model.dart';
 import 'package:butter_fly/responce_models/auth_response_model.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,8 @@ class AuthViewModel extends GetxController{
   final  getOtpNumberObserver = const ApiResult<GetOtpNumberResponseModel>.init().obs;
 
   final  checkOtpNumberObserver = const ApiResult<CheckOtpNumberResponseModel>.init().obs;
+  final  registerUserObserver = const ApiResult<RegisterUserResponseModel>.init().obs;
+  final  updateProfileObserver = const ApiResult<RegisterUserResponseModel>.init().obs;
 
   final  getUserExperienceObserver = const ApiResult<GetUserExperienceResponse>.init().obs;
   final  uploadUserExperienceObserver = const ApiResult<UploadWorkExperienceResponseModel>.init().obs;
@@ -43,7 +46,7 @@ class AuthViewModel extends GetxController{
         final responseData = GetOtpNumberResponseModel.fromJson(body);
         if (responseData.success == true) {
           getOtpNumberObserver.value = ApiResult.success(responseData);
-          Get.offAll(() => OtpVerificationPage(mobileNumber: request.mobileNumber ?? "",otp:responseData.data?.otp));
+          Get.to(() => OtpVerificationPage(mobileNumber: request.mobileNumber ?? "",otp:responseData.data?.otp));
           // Get.offAll(() => VerifyOtpPage(mobile: request.mobile));
         } else {
           getOtpNumberObserver.value =
@@ -74,27 +77,72 @@ class AuthViewModel extends GetxController{
         if (responseData.success == true) {
           checkOtpNumberObserver.value = ApiResult.success(responseData);
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          final verifyOtpResponse = VerifyOtpResponse.fromJson(responseData.data);
-          prefs.setString("token",verifyOtpResponse.token ?? "");
-          print("hello");
-          print(verifyOtpResponse.token ?? "");
-          Get.offAll(() => JobDetailsEntryPage(userId: verifyOtpResponse.userInfo?.id ?? 0));
-          // Get.offAll(() => VerifyOtpPage(mobile: request.mobile));
+          final verifyOtpResponse = responseData.data;
+          prefs.setString("token",verifyOtpResponse?.token ?? "");
+          if((verifyOtpResponse?.token ?? "").isNotEmpty == true){
+            Get.offAll(() => const MainPage());
+          }
+          else{
+            Get.offAll(() => JobDetailsEntryPage(userId: verifyOtpResponse?.userInfo?.id ?? 0, fromUploadResumePage: false,));
+          }
         } else {
-          checkOtpNumberObserver.value = ApiResult.error(responseData.data ?? "");
-          Get.snackbar(responseData.message ?? '', responseData.data ?? '',
-              snackPosition: SnackPosition.BOTTOM,backgroundColor: CustomColors.primary,colorText: Colors.white);
+          throw responseData.data ?? "";
         }
       } else {
-        Get.snackbar('Error','something went wrong +${response.statusText ?? 0}',
-            snackPosition: SnackPosition.BOTTOM,backgroundColor: CustomColors.primary,colorText: Colors.white);
-        checkOtpNumberObserver.value =
-            ApiResult.error("something went wrong. ${response.statusCode ?? 0}");
+        throw 'something went wrong +${response.statusText ?? 0}';
       }
     } catch (e) {
       Get.snackbar('Exception',e.toString(),
           snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.red,colorText: Colors.white);
       checkOtpNumberObserver.value = ApiResult.error(e.toString());
+    }
+  }
+
+  void performRegisterUser(RegisterUserRequestModel request) async {
+    try {
+      registerUserObserver.value = const ApiResult.loading("");
+      final response = await apiProvider.postFormData(EndPoints.register, request.toJson());
+      final body = response.body;
+      if (body != null) {
+        final responseData = RegisterUserResponseModel.fromJson(body);
+        if (responseData.success == true) {
+          Get.offAll(() => const MainPage());
+          registerUserObserver.value = ApiResult.success(responseData);
+        } else {
+          throw responseData.message ?? "";
+        }
+      } else {
+        throw 'something went wrong + ${response.statusText ?? 0}';
+      }
+    } catch (err) {
+      Get.snackbar('Exception',err.toString(),
+          snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.red,colorText: Colors.white);
+      registerUserObserver.value = ApiResult.error(err.toString());
+    }
+  }
+
+  void performUpdateProfile(RegisterUserRequestModel request) async {
+    try {
+      updateProfileObserver.value = const ApiResult.loading("");
+      final response = await apiProvider.postFormData(EndPoints.updateProfile, request.toJson());
+      final body = response.body;
+      if (body != null) {
+        final responseData = RegisterUserResponseModel.fromJson(body);
+        if (responseData.success == true) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("userName",request.name ?? "");
+          updateProfileObserver.value = ApiResult.success(responseData);
+          Get.back();
+        } else {
+          throw responseData.data ?? "";
+        }
+      } else {
+        throw 'something went wrong +${response.statusText ?? 0}';
+      }
+    } catch (e) {
+      Get.snackbar('Exception',e.toString(),
+          snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.red,colorText: Colors.white);
+      updateProfileObserver.value = ApiResult.error(e.toString());
     }
   }
 
@@ -128,7 +176,7 @@ class AuthViewModel extends GetxController{
     }
   }
 
-  void performUploadUserExperience(UserWorkExperienceRequestModel requestBody,File resume) async {
+  void performUploadUserExperience(UserWorkExperienceRequestModel requestBody,File resume,bool fromUploadResumePage) async {
     try {
       uploadUserExperienceObserver.value = const ApiResult.loading("");
       var uri = Uri.parse(apiProvider.apiLiveBaseUrl + EndPoints.userWorkExperience);
@@ -151,18 +199,23 @@ class AuthViewModel extends GetxController{
             .last,
       );
       request.files.add(multipart);
-      print("Request");
-      print(request.fields);
-      print(request.files);
       var response = await request.send();
 
       String responseBody = await response.stream.bytesToString();
       final json = jsonDecode(responseBody);
       final jsonData = UploadWorkExperienceResponseModel.fromJson(json);
       if (jsonData.success == true) {
+        if(fromUploadResumePage){
+          Get.snackbar('Success',"Details Uploaded Successfully", snackPosition: SnackPosition.BOTTOM,backgroundColor: CustomColors.primary,colorText: Colors.white);
+          int count = 0;
+          Get.until((route) => count++ == 1);
+        }else{
+          final responseData = UserWorkExperienceResponseModel.fromJson(jsonData.data);
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("token",responseData.token ?? "");
+          Get.offAll(() => const MainPage());
+        }
         uploadUserExperienceObserver.value = ApiResult.success(jsonData);
-        Get.offAll(() => const MainPage());
-        // Get.offAll(() => VerifyOtpPage(mobile: request.mobile));
       } else {
         uploadUserExperienceObserver.value = ApiResult.error(jsonData.message ?? "");
         Get.snackbar(jsonData.message ?? '', jsonData.message ?? '',

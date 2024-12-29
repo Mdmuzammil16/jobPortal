@@ -4,11 +4,13 @@ import 'package:butter_fly/request_models/auth_request_model.dart';
 import 'package:butter_fly/utils/app_style.dart';
 import 'package:butter_fly/utils/custom_colors.dart';
 import 'package:butter_fly/view_models/auth_view_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class MobileVerificationPage extends StatefulWidget {
   const MobileVerificationPage({super.key});
@@ -19,6 +21,8 @@ class MobileVerificationPage extends StatefulWidget {
 
 class _MobileVerificationPageState extends State<MobileVerificationPage> {
   final authViewModel = Get.put(AuthViewModel());
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   String? _selectedItem = "+ 91";
   final List<String> _items = ['+ 91', '+ 92', '+ 93', '+ 94'];
@@ -45,7 +49,7 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
-                  style: TextStyle(color: CustomColors.textColor,fontSize: 16,fontWeight: FontWeight.w600),"Please confirm your country code and enteryour mobile number"
+                  style: TextStyle(color: CustomColors.textColor,fontSize: 16,fontWeight: FontWeight.w400),"Please confirm your country code and enteryour mobile number"
               ),
             ),
             Padding(
@@ -117,18 +121,21 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end, // Aligns the text to the right
                 children: [
-                  GestureDetector(
-                    onTap:(){
-                      Get.to(() => const ForgotPasswordPage());
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        color: CustomColors.secondary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+                  Visibility(
+                   visible: false,
+                    child: GestureDetector(
+                      onTap:(){
+                        // Get.to(() => const ForgotPasswordPage());
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          color: CustomColors.secondary,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.right,
                       ),
-                      textAlign: TextAlign.right,
                     ),
                   ),
                 ],
@@ -152,12 +159,15 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
                   children: [
                 Container(width:MediaQuery.sizeOf(context).width*0.4,height: 50,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.lightBlue,),
                 child: const Center(child: Text(style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w600),'FACEBOOK',textAlign: TextAlign.center,)) ),
-                Container(width:MediaQuery.sizeOf(context).width*0.4,height: 50,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.red),
-                  child: const Center(child: Text(style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w600),'GOOGLE',textAlign: TextAlign.center,)),)
+                GestureDetector(
+                  onTap: signInWithGoogle,
+                  child: Container(width:MediaQuery.sizeOf(context).width*0.4,height: 50,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.red),
+                    child: const Center(child: Text(style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w600),'GOOGLE',textAlign: TextAlign.center,)),),
+                )
         
               ]),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -192,4 +202,32 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
     )
     );
   }
+
+
+  Future<User?> signInWithGoogle() async {
+    try {
+      // Trigger the Google Sign-In flow
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        return null; // The user canceled the sign-in
+      }
+
+      // Obtain the authentication details
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      // Create a new credential
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+      return userCredential.user;
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
 }

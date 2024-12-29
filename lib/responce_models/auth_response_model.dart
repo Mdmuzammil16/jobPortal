@@ -31,17 +31,28 @@ class CheckOtpNumberResponseModel with _$CheckOtpNumberResponseModel{
   const factory CheckOtpNumberResponseModel.userInfo({
     bool? success,
     String? message,
-    dynamic data
+    VerifyOtpResponse? data
   }) = _CheckOtpNumberResponseModel;
 
   factory CheckOtpNumberResponseModel.fromJson(Map<String,dynamic> json)=> _$CheckOtpNumberResponseModelFromJson(json);
 }
 
 @Freezed()
+class RegisterUserResponseModel with _$RegisterUserResponseModel{
+  const factory RegisterUserResponseModel.userInfo({
+    bool? success,
+    String? message,
+    dynamic data
+  }) = _RegisterUserResponseModel;
+
+  factory RegisterUserResponseModel.fromJson(Map<String,dynamic> json)=> _$RegisterUserResponseModelFromJson(json);
+}
+
+@Freezed()
 class VerifyOtpResponse with _$VerifyOtpResponse{
   const factory VerifyOtpResponse({
-    UserDataModel? userInfo,
     String? token,
+    UserDataModel? userInfo
   }) = _VerifyOtpResponse;
   factory VerifyOtpResponse.fromJson(Map<String,dynamic> json)=> _$VerifyOtpResponseFromJson(json);
 }
@@ -73,23 +84,23 @@ class UserWorkExperienceResponseModel with _$UserWorkExperienceResponseModel{
 class UserDataModel with _$UserDataModel{
   const factory UserDataModel({
     int? id,
-    @JsonKey(name:"sur_name") String? surName,
+    @JsonKey(name:"sur_name") dynamic? surName,
     String? name,
     @JsonKey(name:"middle_name") String? middleName,
     @JsonKey(name:"last_name") String? lastName,
     @JsonKey(name:"profile_pic") String? profilePic,
     String? email,
-    @JsonKey(name:"email_verified_at") DateTime? emailVerifiedAt,
+    @JsonKey(name:"email_verified_at") String? emailVerifiedAt,
     @JsonKey(name:"mobile_number") String? mobileNumber,
     String? otp,
-    @JsonKey(name:"user_process") String? userProcess,
-    @JsonKey(name:"otp_generated_date_time") DateTime? otpGeneratedDateTime,
-    @JsonKey(name:"is_user_type") String? isUserType,
-    @JsonKey(name:"access_token") String? accessToken,
-    String? status,
-    @JsonKey(name:"sort_order") String? sortOrder,
-    @JsonKey(name:"created_at") DateTime? createdAt,
-    @JsonKey(name:"updated_at") DateTime? updatedAt,
+    @JsonKey(name:"user_process") dynamic? userProcess,
+    @JsonKey(name:"otp_generated_date_time") dynamic? otpGeneratedDateTime,
+    @JsonKey(name:"is_user_type") dynamic? isUserType,
+    @JsonKey(name:"access_token") dynamic? accessToken,
+    dynamic? status,
+    @JsonKey(name:"sort_order") dynamic? sortOrder,
+    @JsonKey(name:"created_at") dynamic? createdAt,
+    @JsonKey(name:"updated_at") dynamic? updatedAt,
   }) = _UserDataModel;
   factory UserDataModel.fromJson(Map<String,dynamic> json)=> _$UserDataModelFromJson(json);
 }

@@ -286,3 +286,151 @@ abstract class _SearchJobsRequestModel implements SearchJobsRequestModel {
   _$$SearchJobsRequestModelImplCopyWith<_$SearchJobsRequestModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+AddToBookMarkRequestModel _$AddToBookMarkRequestModelFromJson(
+    Map<String, dynamic> json) {
+  return _AddToBookMarkRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AddToBookMarkRequestModel {
+  @JsonKey(name: "job_id")
+  String? get jobId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AddToBookMarkRequestModelCopyWith<AddToBookMarkRequestModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AddToBookMarkRequestModelCopyWith<$Res> {
+  factory $AddToBookMarkRequestModelCopyWith(AddToBookMarkRequestModel value,
+          $Res Function(AddToBookMarkRequestModel) then) =
+      _$AddToBookMarkRequestModelCopyWithImpl<$Res, AddToBookMarkRequestModel>;
+  @useResult
+  $Res call({@JsonKey(name: "job_id") String? jobId});
+}
+
+/// @nodoc
+class _$AddToBookMarkRequestModelCopyWithImpl<$Res,
+        $Val extends AddToBookMarkRequestModel>
+    implements $AddToBookMarkRequestModelCopyWith<$Res> {
+  _$AddToBookMarkRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? jobId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      jobId: freezed == jobId
+          ? _value.jobId
+          : jobId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AddToBookMarkRequestModelImplCopyWith<$Res>
+    implements $AddToBookMarkRequestModelCopyWith<$Res> {
+  factory _$$AddToBookMarkRequestModelImplCopyWith(
+          _$AddToBookMarkRequestModelImpl value,
+          $Res Function(_$AddToBookMarkRequestModelImpl) then) =
+      __$$AddToBookMarkRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({@JsonKey(name: "job_id") String? jobId});
+}
+
+/// @nodoc
+class __$$AddToBookMarkRequestModelImplCopyWithImpl<$Res>
+    extends _$AddToBookMarkRequestModelCopyWithImpl<$Res,
+        _$AddToBookMarkRequestModelImpl>
+    implements _$$AddToBookMarkRequestModelImplCopyWith<$Res> {
+  __$$AddToBookMarkRequestModelImplCopyWithImpl(
+      _$AddToBookMarkRequestModelImpl _value,
+      $Res Function(_$AddToBookMarkRequestModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? jobId = freezed,
+  }) {
+    return _then(_$AddToBookMarkRequestModelImpl(
+      jobId: freezed == jobId
+          ? _value.jobId
+          : jobId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AddToBookMarkRequestModelImpl implements _AddToBookMarkRequestModel {
+  const _$AddToBookMarkRequestModelImpl(
+      {@JsonKey(name: "job_id") required this.jobId});
+
+  factory _$AddToBookMarkRequestModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddToBookMarkRequestModelImplFromJson(json);
+
+  @override
+  @JsonKey(name: "job_id")
+  final String? jobId;
+
+  @override
+  String toString() {
+    return 'AddToBookMarkRequestModel(jobId: $jobId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddToBookMarkRequestModelImpl &&
+            (identical(other.jobId, jobId) || other.jobId == jobId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, jobId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddToBookMarkRequestModelImplCopyWith<_$AddToBookMarkRequestModelImpl>
+      get copyWith => __$$AddToBookMarkRequestModelImplCopyWithImpl<
+          _$AddToBookMarkRequestModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AddToBookMarkRequestModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AddToBookMarkRequestModel implements AddToBookMarkRequestModel {
+  const factory _AddToBookMarkRequestModel(
+          {@JsonKey(name: "job_id") required final String? jobId}) =
+      _$AddToBookMarkRequestModelImpl;
+
+  factory _AddToBookMarkRequestModel.fromJson(Map<String, dynamic> json) =
+      _$AddToBookMarkRequestModelImpl.fromJson;
+
+  @override
+  @JsonKey(name: "job_id")
+  String? get jobId;
+  @override
+  @JsonKey(ignore: true)
+  _$$AddToBookMarkRequestModelImplCopyWith<_$AddToBookMarkRequestModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

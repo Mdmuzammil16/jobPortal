@@ -8,7 +8,8 @@ import '../utils/custom_colors.dart';
 
 class ExperienceDataComponent extends StatefulWidget {
   final ExperienceData? data;
-  const ExperienceDataComponent({super.key, required this.data});
+  final VoidCallback onClick;
+  const ExperienceDataComponent({super.key, required this.data, required this.onClick});
 
   @override
   State<ExperienceDataComponent> createState() => _ExperienceDataComponentState();
@@ -21,6 +22,7 @@ class _ExperienceDataComponentState extends State<ExperienceDataComponent> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+        widget.onClick();
         setState(() {
           authViewModel.selectedOption.value = widget.data?.id ?? 0;
         });

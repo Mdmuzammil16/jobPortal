@@ -902,6 +902,10 @@ mixin _$Company {
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'company_name')
   String? get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'company_image')
+  String? get companyImage => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -913,7 +917,12 @@ abstract class $CompanyCopyWith<$Res> {
   factory $CompanyCopyWith(Company value, $Res Function(Company) then) =
       _$CompanyCopyWithImpl<$Res, Company>;
   @useResult
-  $Res call({int? id, @JsonKey(name: 'company_name') String? companyName});
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'company_name') String? companyName,
+      @JsonKey(name: 'company_image') String? companyImage,
+      String? description,
+      String? address});
 }
 
 /// @nodoc
@@ -931,6 +940,9 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
   $Res call({
     Object? id = freezed,
     Object? companyName = freezed,
+    Object? companyImage = freezed,
+    Object? description = freezed,
+    Object? address = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -940,6 +952,18 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
       companyName: freezed == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyImage: freezed == companyImage
+          ? _value.companyImage
+          : companyImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -952,7 +976,12 @@ abstract class _$$CompanyImplCopyWith<$Res> implements $CompanyCopyWith<$Res> {
       __$$CompanyImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, @JsonKey(name: 'company_name') String? companyName});
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'company_name') String? companyName,
+      @JsonKey(name: 'company_image') String? companyImage,
+      String? description,
+      String? address});
 }
 
 /// @nodoc
@@ -968,6 +997,9 @@ class __$$CompanyImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? companyName = freezed,
+    Object? companyImage = freezed,
+    Object? description = freezed,
+    Object? address = freezed,
   }) {
     return _then(_$CompanyImpl(
       id: freezed == id
@@ -978,6 +1010,18 @@ class __$$CompanyImplCopyWithImpl<$Res>
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as String?,
+      companyImage: freezed == companyImage
+          ? _value.companyImage
+          : companyImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -986,7 +1030,11 @@ class __$$CompanyImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CompanyImpl implements _Company {
   const _$CompanyImpl(
-      {this.id, @JsonKey(name: 'company_name') this.companyName});
+      {this.id,
+      @JsonKey(name: 'company_name') this.companyName,
+      @JsonKey(name: 'company_image') this.companyImage,
+      this.description,
+      this.address});
 
   factory _$CompanyImpl.fromJson(Map<String, dynamic> json) =>
       _$$CompanyImplFromJson(json);
@@ -996,10 +1044,17 @@ class _$CompanyImpl implements _Company {
   @override
   @JsonKey(name: 'company_name')
   final String? companyName;
+  @override
+  @JsonKey(name: 'company_image')
+  final String? companyImage;
+  @override
+  final String? description;
+  @override
+  final String? address;
 
   @override
   String toString() {
-    return 'Company(id: $id, companyName: $companyName)';
+    return 'Company(id: $id, companyName: $companyName, companyImage: $companyImage, description: $description, address: $address)';
   }
 
   @override
@@ -1009,12 +1064,18 @@ class _$CompanyImpl implements _Company {
             other is _$CompanyImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.companyName, companyName) ||
-                other.companyName == companyName));
+                other.companyName == companyName) &&
+            (identical(other.companyImage, companyImage) ||
+                other.companyImage == companyImage) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.address, address) || other.address == address));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, companyName);
+  int get hashCode => Object.hash(
+      runtimeType, id, companyName, companyImage, description, address);
 
   @JsonKey(ignore: true)
   @override
@@ -1032,9 +1093,11 @@ class _$CompanyImpl implements _Company {
 
 abstract class _Company implements Company {
   const factory _Company(
-          {final int? id,
-          @JsonKey(name: 'company_name') final String? companyName}) =
-      _$CompanyImpl;
+      {final int? id,
+      @JsonKey(name: 'company_name') final String? companyName,
+      @JsonKey(name: 'company_image') final String? companyImage,
+      final String? description,
+      final String? address}) = _$CompanyImpl;
 
   factory _Company.fromJson(Map<String, dynamic> json) = _$CompanyImpl.fromJson;
 
@@ -1043,6 +1106,13 @@ abstract class _Company implements Company {
   @override
   @JsonKey(name: 'company_name')
   String? get companyName;
+  @override
+  @JsonKey(name: 'company_image')
+  String? get companyImage;
+  @override
+  String? get description;
+  @override
+  String? get address;
   @override
   @JsonKey(ignore: true)
   _$$CompanyImplCopyWith<_$CompanyImpl> get copyWith =>

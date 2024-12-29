@@ -17,7 +17,7 @@ class _DetailsComponentState extends State<DetailsComponent> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
         Image.asset(widget.image,width: 20,height:20),
         Padding(
@@ -25,10 +25,10 @@ class _DetailsComponentState extends State<DetailsComponent> {
           child: SizedBox(
             width: MediaQuery.sizeOf(context).width * 0.7,
             child: Text(
-                style: TextStyle(
+                style: TextStyle(height: 2,
                   color: CustomColors.textColor,
                   fontSize: 14,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                   fontStyle: FontStyle.normal,
                 ),widget.text),
           ),

@@ -64,99 +64,82 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
 
-    return Stack(
-      children: [
-        Scaffold(
-          backgroundColor: CustomColors.primary,
-          body:  SafeArea(
-            top: true,
-            child: Stack(
-              children: [
-                Scaffold(
-                  backgroundColor: CustomColors.primary,
-                  body:  SafeArea(
-                    top: true,
-                    child: Stack(
-                      children: [
-                        PageView(
-                          controller: _pageController,
-                          physics: const NeverScrollableScrollPhysics(),
-                          children: _pages,
-                        )
-                      ],
-                    ),
-                  ),
-                  bottomNavigationBar: BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    backgroundColor: Colors.white,
-                    selectedItemColor: CustomColors.secondary,
-                    unselectedIconTheme: const IconThemeData(
-                      color: Colors.black,
-                    ),
-                    unselectedItemColor: Colors.black.withOpacity(0.5),
-                    selectedLabelStyle: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 10,
-                        color: CustomColors.primary),
-                    unselectedLabelStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500),
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                          'assets/images/home.png',
-                          width: 20,
-                          height: 20,
-                          color: _selectedIndex == 0
-                              ? CustomColors.secondary
-                              : Colors.black.withOpacity(0.5),
-                        ),
-                        label: 'Home',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                          'assets/images/categories.png',
-                          width: 20,
-                          height: 20,
-                          color: _selectedIndex == 1
-                              ? CustomColors.secondary
-                              : Colors.black.withOpacity(0.5),
-                        ),
-                        label: 'Categories',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                          'assets/images/bookmark.png',
-                          width: 20,
-                          height: 20,
-                          color: _selectedIndex == 2
-                              ? CustomColors.secondary
-                              : Colors.black.withOpacity(0.5),
-                        ),
-                        label: 'BokMark',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                          'assets/images/profile.png',
-                          width: 20,
-                          height: 20,
-                          color: _selectedIndex == 3
-                              ? CustomColors.secondary
-                              : Colors.black.withOpacity(0.5),
-                        ),
-                        label: 'Profile',
-                      ),
-                    ],
-                    currentIndex: _selectedIndex,
-                    onTap: _onItemTapped,
-                  ),
-                ),
-              ],
-            ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: CustomColors.primary,
+      body:  SafeArea(
+        top: true,
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: _pages,
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.white,
+      selectedItemColor: CustomColors.secondary,
+      unselectedIconTheme: const IconThemeData(
+        color: Colors.black,
+      ),
+      unselectedItemColor: Colors.black.withOpacity(0.5),
+      selectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 10,
+          color: CustomColors.primary),
+      unselectedLabelStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 10,
+          fontWeight: FontWeight.w500),
+      items: [
+        BottomNavigationBarItem(
+          icon: Image.asset(
+            'assets/images/home.png',
+            width: 20,
+            height: 20,
+            color: _selectedIndex == 0
+                ? CustomColors.secondary
+                : Colors.black.withOpacity(0.5),
           ),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Image.asset(
+            'assets/images/categories.png',
+            width: 20,
+            height: 20,
+            color: _selectedIndex == 1
+                ? CustomColors.secondary
+                : Colors.black.withOpacity(0.5),
+          ),
+          label: 'Categories',
+        ),
+        BottomNavigationBarItem(
+          icon: Image.asset(
+            'assets/images/bookmark.png',
+            width: 20,
+            height: 20,
+            color: _selectedIndex == 2
+                ? CustomColors.secondary
+                : Colors.black.withOpacity(0.5),
+          ),
+          label: 'BokMark',
+        ),
+        BottomNavigationBarItem(
+          icon: Image.asset(
+            'assets/images/profile.png',
+            width: 20,
+            height: 20,
+            color: _selectedIndex == 3
+                ? CustomColors.secondary
+                : Colors.black.withOpacity(0.5),
+          ),
+          label: 'Profile',
         ),
       ],
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
+    ),
     );
   }
 }

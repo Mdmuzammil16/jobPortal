@@ -26,8 +26,8 @@ class _ReviewsTabState extends State<ReviewsTab> {
             Text(
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                   fontStyle: FontStyle.normal,
                 ),"Overall Rating"),
             Padding(
@@ -45,8 +45,8 @@ class _ReviewsTabState extends State<ReviewsTab> {
             Text(
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                   fontStyle: FontStyle.normal,
                 ),"Reviews"),
             ListView.builder(

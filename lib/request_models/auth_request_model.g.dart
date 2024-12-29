@@ -18,6 +18,22 @@ Map<String, dynamic> _$$GetOtpNumberRequestModelImplToJson(
       'mobile_number': instance.mobileNumber,
     };
 
+_$RegisterUserRequestModelImpl _$$RegisterUserRequestModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$RegisterUserRequestModelImpl(
+      name: json['name'] as String,
+      email: json['email'] as String,
+      mobileNumber: json['mobile_number'] as String?,
+    );
+
+Map<String, dynamic> _$$RegisterUserRequestModelImplToJson(
+        _$RegisterUserRequestModelImpl instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'email': instance.email,
+      'mobile_number': instance.mobileNumber,
+    };
+
 _$CheckOtpNumberRequestModelImpl _$$CheckOtpNumberRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$CheckOtpNumberRequestModelImpl(

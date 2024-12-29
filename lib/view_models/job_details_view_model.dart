@@ -1,4 +1,5 @@
 import 'package:butter_fly/api/api_provider.dart';
+import 'package:butter_fly/responce_models/apply_job_details_response_model.dart';
 import 'package:butter_fly/responce_models/job_details_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import '../utils/custom_colors.dart';
 
 class JobDetailsViewModel extends GetxController{
   final apiProvider = Get.put(ApiProvider());
+  final  getApplyJobDetailsObserver = const ApiResult<ApplyJobDetailsResponseModel>.init().obs;
   final  getAllJobsObserver = const ApiResult<JobDetailsResponseModel>.init().obs;
   final getPopularJobsDataObserver = const ApiResult<JobDetailsResponseModel>.init().obs;
   final getRecomendedJobsObserver = const ApiResult<JobDetailsResponseModel>.init().obs;
@@ -17,6 +19,27 @@ class JobDetailsViewModel extends GetxController{
   final getJobDetailsByJobIDObserver = const ApiResult<JobDetailsResponseModel>.init().obs;
   final searchJobsObserver = const ApiResult<JobDetailsResponseModel>.init().obs;
 
+  void performFetchApplyJobDetails() async {
+    try {
+      getApplyJobDetailsObserver.value = const ApiResult.loading("");
+      final response = await apiProvider.getApi(EndPoints.applyJobDetails);
+      final body = response.body;
+      if (response.isOk && body != null) {
+        final responseData = ApplyJobDetailsResponseModel.fromJson(body);
+        if (responseData.success == true) {
+          getApplyJobDetailsObserver.value = ApiResult.success(responseData);
+        } else {
+          throw responseData.message ?? '';
+        }
+      } else {
+        throw 'something went wrong+${response.statusText ?? 0}';
+      }
+    } catch (e) {
+      Get.snackbar('Exception',e.toString(),
+          snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.red,colorText: Colors.white);
+      getApplyJobDetailsObserver.value = ApiResult.error(e.toString());
+    }
+  }
 
   void performGetAllJobs() async {
     try {
